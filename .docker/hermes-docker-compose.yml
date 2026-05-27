@@ -1,0 +1,29 @@
+services:
+  hermes-manager:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-manager
+    restart: unless-stopped
+    command: gateway run
+    env_file:
+      - ./.env
+    ports:
+      - "8642:8642"   # gateway API
+      - "9119:9119"   # dashboard (only reached when HERMES_DASHBOARD=1)
+    volumes:
+      - ../.hermes:/opt/data
+      - ../.docker:/opt/docker
+      - ../.workspace:/opt/workspace
+      - ../docs:/opt/docs
+    environment:
+      - HERMES_DASHBOARD=1
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: "2.0"
+    networks:
+      - hermes-net
+
+networks:
+  hermes-net:
+    driver: bridge

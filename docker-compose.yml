@@ -10,7 +10,10 @@ services:
       - "8642:8642"   # gateway API
       - "9119:9119"   # dashboard (only reached when HERMES_DASHBOARD=1)
     volumes:
-      - ./.hermes:/opt/data
+      - ../.hermes:/opt/data
+      - ../.docker:/opt/docker
+      - ../.workspace:/opt/workspace
+      - ../docs:/opt/docs
     environment:
       - HERMES_DASHBOARD=1
     deploy:
