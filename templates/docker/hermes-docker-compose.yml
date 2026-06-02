@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     command: ["gateway", "run"]
     env_file:
-      - ./.env
+      - $PROJECT_DIR/.env
     environment:
       API_SERVER_KEY: ${API_SERVER_KEY:-}
       DASHBOARD_MODE: 1
@@ -13,11 +13,10 @@ services:
       - "${HERMES_API_PORT:-8642}:8642"   # gateway API
       - "${HERMES_DASHBOARD_PORT:-9119}:9119"   # dashboard
     volumes:
-      - ${HERMES_DATA_PATH:-../.hermes}:/opt/data
-      - ../docker-service:/opt/data/docker-service
-      - ../templates:/opt/data/templates
-      - ../backups:/opt/data/backups
-      - ../README.md:/opt/data/README.md
+      - $PROJECT_DIR/.hermes:/opt/data
+      - $PROJECT_DIR/docker-service:/opt/hermes/docker-service
+      - $PROJECT_DIR/templates:/opt/hermes/templates
+      - $PROJECT_DIR/backups:/opt/hermes/backups
     deploy:
       resources:
         limits:
@@ -29,7 +28,7 @@ services:
     container_name: ${HERMES_WORKSPACE_CONTAINER_NAME:-hermes-dashboard}
     restart: unless-stopped
     env_file:
-      - ./.env
+      - $PROJECT_DIR/.env
     environment:
       HERMES_API_URL: http://hermes-agent:8642
       HERMES_DASHBOARD_URL: http://hermes-agent:9119
