@@ -10,7 +10,7 @@ echo "[Hermes] Starting Hermes Agent..."
 PROJECT_DIR="$(cd "$(dirname "$0")" && pwd)"
 export PROJECT_DIR
 echo "[Hermes] Project Directory: $PROJECT_DIR"
-COMPOSE_FILE="$PROJECT_DIR/templates/docker/hermes-docker-compose.yml"
+COMPOSE_FILE="$PROJECT_DIR/docker-compose.yml"
 ENV_FILE="$PROJECT_DIR/.env"
 
 # ============================================

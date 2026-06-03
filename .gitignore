@@ -1,3 +1,5 @@
 .env
-.hermes/
-.workspace/
+.hermes-data/
+.hermes-home/
+.hermes
+templates
